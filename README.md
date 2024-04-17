@@ -1,7 +1,6 @@
-
 import hashlib
 import os
-
+# verificar se usuario existe
 def verificar_usuario_existente(nome_arquivo, nome_usuario):
     with open(nome_arquivo, 'r') as arquivo:
         for linha in arquivo:
@@ -9,7 +8,7 @@ def verificar_usuario_existente(nome_arquivo, nome_usuario):
             if dados[0] == nome_usuario:
                 return True
         return False
-
+# salvar arquivo
 def salvar_arquivo(nome_arquivo, nome_usuario, senha):
     if verificar_usuario_existente(nome_arquivo, nome_usuario):
         print("Este usuário já existe. Por favor, escolha outro nome de usuário.")
@@ -21,7 +20,7 @@ def salvar_arquivo(nome_arquivo, nome_usuario, senha):
             arquivo.write(f"{nome_usuario},{salt.hex()},{hash_senha}\n")
             print('Usuário criado com sucesso')
             return True
-
+# ler arquivo
 def ler_arquivo(nome_arquivo):
     with open(nome_arquivo, 'r') as arquivo:
         usuarios = []
@@ -31,7 +30,7 @@ def ler_arquivo(nome_arquivo):
     return usuarios
 
 ARQUIVO = 'usuarios.txt'
-
+# criar conta
 while True:
     nome_usuario = input('Crie um login:')
     psw_usuario = input('Crie uma senha:')
@@ -55,7 +54,7 @@ for usuario in usuarios:
 
     if nome == login and senha == hash_senha2:
         autenticado = True
-        break
+        break                    
 
 if autenticado:
     print('Seja bem-vindo')
